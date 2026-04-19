@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>JAYSON S | Java Developer Portfolio</title>
+  <!-- Google Fonts & Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0A0F14;
+      color: #E0F2FE;
+      scroll-behavior: smooth;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* ===== LANDING SECTION ===== */
+    .landing {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      background: #0A0F14;
+      overflow: hidden;
+    }
+
+    /* Geometric Portal Background */
+    .portal-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .portal-shape {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 80vmax;
+      height: 80vmax;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(0,210,200,0.15) 0%, rgba(255,100,80,0.08) 70%, transparent 100%);
+      border-radius: 50%;
+      animation: pulsePortal 8s ease-in-out infinite;
+    }
+
+    .portal-ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 60vmax;
+      height: 60vmax;
+      transform: translate(-50%, -50%);
+      border: 2px solid rgba(0, 210, 200, 0.3);
+      border-radius: 50%;
+      animation: spinRing 20s linear infinite;
+    }
+
+    .portal-ring:nth-child(2) {
+      width: 45vmax;
+      height: 45vmax;
+      border-color: rgba(255, 100, 80, 0.25);
+      animation-direction: reverse;
+      animation-duration: 15s;
+    }
+
+    .portal-ring:nth-child(3) {
+      width: 30vmax;
+      height: 30vmax;
+      border: 1px solid rgba(0, 210, 200, 0.5);
+      animation-duration: 12s;
+    }
+
+    @keyframes pulsePortal {
+      0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+      50% { opacity: 0.9; transform: translate(-50%, -50%) scale(1.05); }
+    }
+
+    @keyframes spinRing {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    .geometric-shapes {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+    }
+    .geo-diamond {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #00D2C8, #FF6450);
+      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+      opacity: 0.1;
+      animation: floatGeo 12s infinite alternate;
+    }
+    @keyframes floatGeo {
+      0% { transform: translateY(0px) rotate(0deg); opacity: 0.05; }
+      100% { transform: translateY(-40px) rotate(15deg); opacity: 0.2; }
+    }
+
+    .landing-content {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    /* Left side: Animated Profile Image */
+    .profile-animation {
+      flex: 0 0 280px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: floatProfile 4s ease-in-out infinite;
+    }
+
+    .profile-animation img {
+      width: 260px;
+      height: 260px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      background: linear-gradient(135deg, #00D2C8, #FF6450) border-box;
+      box-shadow: 0 0 30px rgba(0,210,200,0.3), 0 0 15px rgba(255,100,80,0.2);
+      transition: transform 0.3s;
+    }
+
+    .profile-animation img:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 45px rgba(0,210,200,0.5);
+    }
+
+    @keyframes floatProfile {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-12px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .right-greeting {
+      flex: 1;
+    }
+
+    .hi-block {
+      font-size: 4rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .hi-text {
+      background: linear-gradient(120deg, #00D2C8, #FF6450);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      font-size: 5rem;
+      text-shadow: 0 0 12px rgba(255,100,80,0.4);
+    }
+
+    .name-highlight {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      text-shadow: 0 0 8px rgba(255,100,80,0.3);
+    }
+
+    .tagline {
+      font-size: 1.2rem;
+      color: #B0E0E6;
+      max-width: 600px;
+      border-left: 4px solid #FF6450;
+      padding-left: 1.2rem;
+      margin-top: 0.8rem;
+      text-shadow: 0 0 5px rgba(0,210,200,0.2);
+    }
+
+    .btn-group {
+      margin-top: 2rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(105deg, #00D2C8, #FF6450);
+      color: #0A0F14;
+      border: none;
+      padding: 0.9rem 2rem;
+      border-radius: 40px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 1rem;
+      box-shadow: 0 5px 15px rgba(0,210,200,0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 25px rgba(255,100,80,0.4);
+      filter: brightness(1.05);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid #00D2C8;
+      padding: 0.9rem 2rem;
+      border-radius: 40px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      color: #E0F2FE;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .btn-outline:hover {
+      background: rgba(0,210,200,0.1);
+      border-color: #FF6450;
+      color: #FF6450;
+    }
+
+    /* Section styling */
+    section {
+      padding: 5rem 0;
+    }
+
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 2.5rem;
+      position: relative;
+      display: inline-block;
+      color: #FFFFFF;
+      text-shadow: 0 0 5px rgba(255,100,80,0.3);
+    }
+
+    .section-title:after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60%;
+      height: 4px;
+      background: linear-gradient(90deg, #00D2C8, #FF6450);
+      border-radius: 2px;
+    }
+
+    .objective-card, .edu-card, .skill-box, .internship-card, .download-area, .project-item {
+      background: rgba(18, 25, 35, 0.8);
+      backdrop-filter: blur(2px);
+      border-radius: 32px;
+      padding: 1.8rem;
+      border: 1px solid rgba(0,210,200,0.2);
+      transition: all 0.2s;
+      color: #E0F2FE;
+    }
+
+    .objective-card {
+      background: rgba(18, 25, 35, 0.9);
+    }
+
+    .edu-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .edu-card h3 {
+      color: #FF6450;
+    }
+
+    .percentage {
+      color: #00D2C8;
+      font-weight: 700;
+    }
+
+    /* Projects */
+    .project-item {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .project-img {
+      flex: 0 0 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .project-img img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 24px;
+      border: 1px solid #00D2C8;
+      box-shadow: 0 5px 12px rgba(0,0,0,0.3);
+    }
+    .project-details {
+      flex: 1;
+    }
+    .project-details h3 {
+      color: #FF6450;
+      margin-bottom: 0.5rem;
+    }
+    .tools-used {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin: 0.8rem 0;
+    }
+    .tool-badge {
+      background: rgba(0,210,200,0.2);
+      padding: 0.3rem 1rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      color: #00D2C8;
+    }
+    .skill-learned {
+      background: rgba(255,100,80,0.15);
+      padding: 0.3rem 1rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      color: #FFA098;
+      display: inline-block;
+      margin-right: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .project-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+      align-items: center;
+    }
+    .github-link, .demo-link {
+      background: #00D2C8;
+      color: #0A0F14;
+      padding: 0.5rem 1.2rem;
+      border-radius: 40px;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: 0.2s;
+      font-size: 0.85rem;
+    }
+    .demo-link {
+      background: #FF6450;
+    }
+    .github-link:hover {
+      background: #FF6450;
+      color: white;
+    }
+    .demo-link:hover {
+      background: #00D2C8;
+      color: #0A0F14;
+    }
+
+    .skill-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+    .skill-tag {
+      background: rgba(0,210,200,0.15);
+      padding: 0.5rem 1.2rem;
+      border-radius: 40px;
+      font-weight: 500;
+      color: #B0E0E6;
+    }
+    .internship-card {
+      border-left: 5px solid #FF6450;
+    }
+    .download-area {
+      text-align: center;
+      background: rgba(18, 25, 35, 0.95);
+    }
+    .btn-download {
+      background: linear-gradient(105deg, #00D2C8, #FF6450);
+      border: none;
+      padding: 1rem 2.5rem;
+      font-size: 1.1rem;
+      border-radius: 60px;
+      color: #0A0F14;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      cursor: pointer;
+      transition: 0.2s;
+      text-decoration: none;
+    }
+    .btn-download:hover {
+      transform: scale(1.02);
+      box-shadow: 0 10px 25px rgba(255,100,80,0.4);
+    }
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+    .contact-links a, .contact-links span {
+      color: #B0E0E6;
+      text-decoration: none;
+      transition: color 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .contact-links a:hover {
+      color: #FF6450;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: #5A7D8C;
+      border-top: 1px solid rgba(0,210,200,0.2);
+    }
+    @media (max-width: 780px) {
+      .landing-content { flex-direction: column; text-align: center; }
+      .profile-animation { order: 1; }
+      .right-greeting { order: 2; text-align: center; }
+      .tagline { margin-left: auto; margin-right: auto; }
+      .hi-text { font-size: 3rem; }
+      .name-highlight { font-size: 1.8rem; }
+      .profile-animation img { width: 180px; height: 180px; }
+      .project-img { flex: 0 0 100px; }
+      .project-img img { width: 80px; height: 80px; }
+      .project-links { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="landing">
+    <!-- GEOMETRIC PORTAL + GRADIENTS -->
+    <div class="portal-bg">
+      <div class="portal-shape"></div>
+      <div class="portal-ring"></div>
+      <div class="portal-ring"></div>
+      <div class="portal-ring"></div>
+      <div class="geometric-shapes">
+        <div class="geo-diamond" style="top: 15%; left: 10%;"></div>
+        <div class="geo-diamond" style="top: 70%; left: 85%; width: 40px; height: 40px; animation-duration: 18s;"></div>
+        <div class="geo-diamond" style="top: 40%; left: 92%; width: 30px; height: 30px;"></div>
+        <div class="geo-diamond" style="bottom: 12%; left: 5%; width: 50px; height: 50px;"></div>
+      </div>
+    </div>
+    <div class="container landing-content">
+      <!-- Left side: YOUR PROFILE IMAGE -->
+      <div class="profile-animation">
+        <img src="jay.jpg" alt="Jayson Stanly">
+      </div>
+      <div class="right-greeting">
+        <div class="hi-block">
+          <span class="hi-text">hi</span>
+          <span class="name-highlight">👋 I'm JAYSON S</span>
+        </div>
+        <div class="tagline">
+          Java Developer | Software Associate | Full-Stack Enthusiast
+        </div>
+        <div class="btn-group">
+          <a href="#projects" class="btn-primary">Explore Work <i class="fas fa-arrow-down"></i></a>
+          <a href="#contact-resume" class="btn-outline">Download Resume <i class="fas fa-file-pdf"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <!-- Objective Section -->
+    <section id="objective">
+      <div class="container">
+        <h2 class="section-title">Career Objective</h2>
+        <div class="objective-card">
+          Motivated BSc Computer Science undergraduate with a strong aspiration to build a career as a Java Developer and Software Associate. Possesses in-depth core Java knowledge and hands-on project experience with Java, C, and C++. Actively developing foundational web development skills (HTML, CSS, JavaScript) to complement backend capabilities. Passionate about writing clean, efficient, and secure code with completed Core Java proficiency. Adaptable to new technologies, eager to apply problem-solving and software engineering fundamentals in a professional environment.
+        </div>
+      </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education">
+      <div class="container">
+        <h2 class="section-title">Education</h2>
+        <div class="edu-grid">
+          <div class="edu-card">
+            <h3>B.Sc. Computer Science with Cyber Security</h3>
+            <div>DR.N.G.P.Arts and Science College, Bharathiar University</div>
+            <div>Year of Passing: 2026 | <span class="percentage">Current Aggregate: 77%</span></div>
+          </div>
+          <div class="edu-card">
+            <h3>Higher Secondary Certificate (12th)</h3>
+            <div>Vikas Vidyalaya Matriculation Higher Secondary School</div>
+            <div>Year of Passing: 2023 | <span class="percentage">Percentage: 80%</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section (Updated with Tourist Path Finder + all live demo links) -->
+    <section id="projects">
+      <div class="container">
+        <h2 class="section-title">Projects</h2>
+        <div class="projects-grid" style="display: flex; flex-direction: column; gap: 2rem;">
+          
+          <!-- Banking Chatbot (No live demo, only source) -->
+          <div class="project-item">
+            <div class="project-img"><img src="https://placehold.co/400x400/00D2C8/0A0F14?text=BankBot" alt="BankBot"></div>
+            <div class="project-details"><h3>💬 Banking Chatbot</h3><div>Interactive Java-based banking chatbot using OOP. Enables balance inquiries, fund transfers, and account support.</div><div class="tools-used"><span class="tool-badge">Java</span><span class="tool-badge">OOP</span></div><div><strong>📚 Skills learned:</strong> <span class="skill-learned">Object-Oriented Design</span><span class="skill-learned">Input Handling</span></div><div class="project-links"><a href="https://github.com/Jay-source-ui/Banking-Chatbot" target="_blank" class="github-link"><i class="fab fa-github"></i> Source Code</a></div></div>
+          </div>
+
+          <!-- NEW: Tourist Path Finder (Hackathon Project) -->
+          <div class="project-item">
+            <div class="project-img"><img src="https://placehold.co/400x400/FF6450/0A0F14?text=TouristPath" alt="Tourist Path Finder"></div>
+            <div class="project-details"><h3>🗺️ Tourist Path Finder</h3><div>Hackathon project: web application to suggest optimized tourist paths using Google Maps API. Connected frontend with MySQL for storing user preferences and travel history.</div><div class="tools-used"><span class="tool-badge">HTML/CSS</span><span class="tool-badge">JavaScript</span><span class="tool-badge">Google Maps API</span></div><div><strong>📍 Skills learned:</strong> <span class="skill-learned">API Integration</span><span class="skill-learned">Route Optimization</span></div><div class="project-links"><a href="https://github.com/Jay-source-ui/Tourist-Path-Finder" target="_blank" class="github-link"><i class="fab fa-github"></i> Source Code</a><a href="https://tourist-path-finder.netlify.app/" target="_blank" class="demo-link"><i class="fas fa-map-marked-alt"></i> Live Demo</a></div></div>
+          </div>
+          
+          <!-- Smart Inventory Management System (with live demo) -->
+          <div class="project-item">
+            <div class="project-img"><img src="https://placehold.co/400x400/FF6450/0A0F14?text=Inventory" alt="Inventory"></div>
+            <div class="project-details"><h3>📦 Smart Inventory Management</h3><div>Hackathon project: track stock, sales, restocking alerts. Real-time updates with responsive UI & MySQL.</div><div class="tools-used"><span class="tool-badge">HTML/CSS</span><span class="tool-badge">JavaScript</span><span class="tool-badge">MySQL</span></div><div><strong>🧠 Skills learned:</strong> <span class="skill-learned">Full-stack Integration</span><span class="skill-learned">DB Management</span></div><div class="project-links"><a href="https://github.com/Jay-source-ui/Inventory-Management" target="_blank" class="github-link"><i class="fab fa-github"></i> GitHub Repo</a><a href="https://smart-inventor-system.netlify.app/" target="_blank" class="demo-link"><i class="fas fa-external-link-alt"></i> Live Demo</a></div></div>
+          </div>
+          
+          <!-- Netflix Clone (live demo) -->
+          <div class="project-item">
+            <div class="project-img"><img src="https://placehold.co/400x400/00D2C8/white?text=Netflix" alt="Netflix"></div>
+            <div class="project-details"><h3>🎬 Netflix Clone</h3><div>Full-stack Netflix clone using React.js and Firebase. User auth, dynamic movie browsing, TMDB API.</div><div class="tools-used"><span class="tool-badge">React.js</span><span class="tool-badge">Firebase</span><span class="tool-badge">TMDB API</span></div><div><strong>🔥 Skills learned:</strong> <span class="skill-learned">React Hooks</span><span class="skill-learned">Firebase Auth</span></div><div class="project-links"><a href="https://github.com/Jay-source-ui/Netflix-Clone" target="_blank" class="github-link"><i class="fab fa-github"></i> Source Code</a><a href="https://netflix-clone-aj0x7oivd-jays-projects-ef3ed722.vercel.app" target="_blank" class="demo-link"><i class="fas fa-play"></i> Live Demo</a></div></div>
+          </div>
+          
+          <!-- User Management System (live demo) -->
+          <div class="project-item">
+            <div class="project-img"><img src="https://placehold.co/400x400/FF6450/0A0F14?text=UserMgmt" alt="UserMgmt"></div>
+            <div class="project-details"><h3>👥 User Management System</h3><div>Full-stack user management with RESTful APIs. Registration, login, profile update/delete.</div><div class="tools-used"><span class="tool-badge">REST API</span><span class="tool-badge">HTML/CSS/JS</span></div><div><strong>⚙️ Skills learned:</strong> <span class="skill-learned">RESTful design</span><span class="skill-learned">CRUD</span></div><div class="project-links"><a href="https://github.com/Jay-source-ui/user-manager-api.git" target="_blank" class="github-link"><i class="fab fa-github"></i> View Code</a><a href="https://user-manager-api-1kpc.onrender.com" target="_blank" class="demo-link"><i class="fas fa-globe"></i> Live Demo</a></div></div>
+          </div>
+          
+          <!-- Bug Tracker System (live demo) -->
+          <div class="project-item">
+            <div class="project-img"><img src="https://placehold.co/400x400/00D2C8/0A0F14?text=BugTracker" alt="Bug Tracker"></div>
+            <div class="project-details"><h3>🐞 Bug Tracker System</h3><div>Bug tracking system with Spring Boot & MySQL. Create, assign, track, close bug reports.</div><div class="tools-used"><span class="tool-badge">Spring Boot</span><span class="tool-badge">MySQL</span><span class="tool-badge">JPA</span></div><div><strong>📌 Skills learned:</strong> <span class="skill-learned">Spring Data JPA</span><span class="skill-learned">Role-based Access</span></div><div class="project-links"><a href="https://github.com/Jay-source-ui/BugTracker" target="_blank" class="github-link"><i class="fab fa-github"></i> Resources</a><a href="https://bugtracker-2-ocaw.onrender.com" target="_blank" class="demo-link"><i class="fas fa-bug"></i> Live Demo</a></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section (added ReactJS, WordPress) -->
+    <section id="skills">
+      <div class="container">
+        <h2 class="section-title">Skills & Expertise</h2>
+        <div class="skills-wrapper" style="display: flex; flex-wrap: wrap; gap: 2rem;">
+          <div class="skill-box" style="flex:1"><h3><i class="fas fa-code"></i> Technical Skills</h3><div class="skill-items"><span class="skill-tag">C/C++</span><span class="skill-tag">Core Java</span><span class="skill-tag">HTML/CSS/JS</span><span class="skill-tag">Spring Boot</span><span class="skill-tag">MySQL</span><span class="skill-tag">REST API</span><span class="skill-tag">React.js</span><span class="skill-tag">WordPress</span><span class="skill-tag">Firebase</span><span class="skill-tag">Microsoft Excel</span></div></div>
+          <div class="skill-box" style="flex:1"><h3><i class="fas fa-users"></i> Soft Skills</h3><div class="skill-items"><span class="skill-tag">Team Collaboration</span><span class="skill-tag">Fast Learner</span><span class="skill-tag">Adaptability</span><span class="skill-tag">Analytical Thinking</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Internship -->
+    <section id="internship">
+      <div class="container">
+        <h2 class="section-title">Internship</h2>
+        <div class="internship-card"><i class="fas fa-laptop-code" style="font-size: 2rem; color: #FF6450;"></i><h3 style="margin-top: 0.5rem;">WEB DEVELOPMENT INTERN</h3><p><strong>Nitroware Technology</strong>, Hopes College, Coimbatore | Duration: 15 Days</p><p>Hands-on experience in building responsive web interfaces, collaborating on frontend modules, and learning industry workflows.</p></div>
+      </div>
+    </section>
+
+    <!-- Download Resume + Contact -->
+    <section id="contact-resume">
+      <div class="container">
+        <div class="download-area">
+          <h3 style="font-size: 1.8rem; margin-bottom: 1rem; color:#FF6450;">📄 Ready to dive deeper?</h3>
+          <p style="margin-bottom: 1.8rem;">Get my complete resume with detailed credentials, certifications, and achievements.</p>
+          <a href="jay's resume.pdf" download="JAYSON_S_Resume.pdf" class="btn-download">
+            <i class="fas fa-download"></i> Download Resume (PDF)
+          </a>
+          <div class="contact-links">
+            <span><i class="fas fa-phone-alt"></i> 87780 76657</span>
+            <span><i class="fas fa-envelope"></i> jaysons974@gmail.com</span>
+            <a href="https://www.linkedin.com/in/jaysonstanly02" target="_blank"><i class="fab fa-linkedin"></i> linkedin.com/in/jaysonstanly02</a>
+            <a href="https://github.com/Jay-source-ui" target="_blank"><i class="fab fa-github"></i> github.com/Jay-source-ui</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <p>© 2026 JAYSON S — Passionate Java Developer | Teal & Coral Geometry</p>
+  </footer>
+
+  <script>
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const targetId = this.getAttribute('href');
+        if(targetId === "#" || targetId === "") return;
+        const target = document.querySelector(targetId);
+        if(target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
